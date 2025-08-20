@@ -244,3 +244,8 @@ docker/
 .vscode/
 .idea/
 .DS_Store
+
+#Backup or temp files
+*.log
+*.bak
+*.swp
