@@ -1,6 +1,6 @@
 # CSIR LimeSurvey Customization (`limesurvey-csir`)
 
-This repository is a fork of LimeSurvey for CSIR (Ghana) customizations.  
+This repository is a fork of LimeSurvey for CSIR customizations.  
 **Author/Owner:** @PaakowTronics  
 **Primary working branch:** `csir-custom`  
 **Tooling:** VS Code + Git/GitHub (no XAMPP instructions here)
@@ -12,6 +12,9 @@ This repository is a fork of LimeSurvey for CSIR (Ghana) customizations.
 - Git installed: `git --version`
 - VS Code installed
 - A GitHub account with **Write** access to this repo
+- XAMPP/WAMP for web testing 
+VScode Editor is highly recommended for coding due to .gitignore configuration
+    ** If you prefer a different code editor, let me know 
 
 ---
 
@@ -58,7 +61,8 @@ themes/admin/csir_admin/
 Optional survey theme (if used):
 themes/survey/csir_fruity/ (or your chosen name)
 
-⚠️ Avoid editing core application files unless you are overriding via proper theme/view overrides. Theme copies are not overwritten by LimeSurvey updates.
+⚠️ Avoid editing core application files unless you are overriding via proper theme/view overrides.
+Theme copies are not overwritten by LimeSurvey updates.
 
 
 5) Handling merge conflicts
