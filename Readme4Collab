@@ -20,6 +20,11 @@ VScode Editor is highly recommended for coding due to .gitignore configuration
 
 ## 1) First-time setup (collaborators)
 
+important: all instructions should be done in bash.
+Change terminal to bash and set as default 
+
+
+
 ```bash
 # 1) Clone the repo
 git clone https://github.com/PaakowTronics/limesurvey-csir.git
