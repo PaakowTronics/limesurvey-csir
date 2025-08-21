@@ -122,36 +122,7 @@ For larger changes, create a feature branch:
     git push origin feature/admin-login-header
 
 Then open a Pull Request to csir-custom on GitHub for review.
-## 6. Optional: Feature Branches + PRs
 
-For larger changes, create a feature branch:
-
-# Create branch from csir-custom
-    git checkout csir-custom
-    git pull origin csir-custom
-    git checkout -b feature/admin-login-header
-
-# Work, then save
-    git add .
-    git commit -m "Add CSIR header to admin login"
-    git push origin feature/admin-login-header
-
-Then open a Pull Request to csir-custom on GitHub for review.
-## 6. Optional: Feature Branches + PRs
-
-For larger changes, create a feature branch:
-
-# Create branch from csir-custom
-    git checkout csir-custom
-    git pull origin csir-custom
-    git checkout -b feature/admin-login-header
-
-# Work, then save
-    git add .
-    git commit -m "Add CSIR header to admin login"
-    git push origin feature/admin-login-header
-
-Then open a Pull Request to csir-custom on GitHub for review.
 ## 7. Security & Housekeeping
 
 ❌ Do not commit secrets (passwords, tokens, DB creds).
