@@ -379,7 +379,9 @@ function submittokens($quotaexit = false)
     }
     $clienttoken = $_SESSION['survey_' . $surveyid]['token'] ?? '';
 
-    if (($clienttoken === '') && ($thissurvey['access_mode'] !== SurveyAccessModeService::$ACCESS_TYPE_CLOSED)) {
+    $tokenused = ($_SESSION['survey_' . $surveyid]['tokenused'] ?? false);
+
+    if (($clienttoken === '') && (!$tokenused) && ($thissurvey['access_mode'] !== SurveyAccessModeService::$ACCESS_TYPE_CLOSED)) {
         return; //optional
     }
 
@@ -387,7 +389,7 @@ function submittokens($quotaexit = false)
     $today = dateShift(date("Y-m-d H:i:s"), "Y-m-d H:i", Yii::app()->getConfig("timeadjust"));
 
     // check how many uses the token has left
-    $token = Token::model($surveyid)->findByAttributes(array('token' => $clienttoken));
+    $token = Token::model($surveyid)->findByAttributes(array('token' => $clienttoken ? $clienttoken : $tokenused));
     if (!$token) {
         throw new CHttpException(403, gT("Invalid access code"));
     }
@@ -395,7 +397,9 @@ function submittokens($quotaexit = false)
 
     if ($quotaexit == true) {
         $token->completed = 'Q';
-        $token->usesleft--;
+        if (!$tokenused) {
+            $token->usesleft--;
+        }
     } else {
         if ($token->usesleft <= 1) {
             // Finish the token
@@ -1869,6 +1873,8 @@ function getReferringUrl()
 
 /**
 * Shows the welcome page, used in group by group and question by question mode
+* @param mixed $thissurvey unused, reset to aSurveyInfo at start of function
+* @param array $aSurveyInfo
 */
 function display_first_page($thissurvey, $aSurveyInfo)
 {
@@ -1877,7 +1883,7 @@ function display_first_page($thissurvey, $aSurveyInfo)
     $thissurvey                 = $aSurveyInfo;
     $thissurvey['aNavigator']   = getNavigatorDatas();
     LimeExpressionManager::StartProcessingPage();
-    LimeExpressionManager::StartProcessingGroup(-1, false, $surveyid); // start on welcome page
+    LimeExpressionManager::StartProcessingGroup(-1, $thissurvey['anonymized'] != "N", $surveyid); // start on welcome page
 
     // WHY HERE ?????
     $_SESSION['survey_' . $surveyid]['LEMpostKey'] = mt_rand();
