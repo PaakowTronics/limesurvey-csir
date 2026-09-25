@@ -35,14 +35,14 @@ var RoleControl = function () {
         form.attr('action', url);
         form.append('<input type="hidden" name="ptid" value="' + ptid + '" />');
         form.append('<input type="hidden" name="action" value="' + action + '" />');
-        form.append('<input type="hidden" name="YII_CSRF_TOKEN" value="' + LS.data.csrfToken + '" />');
+        form.append($("<input type='hidden'>").attr("name", LS.data.csrfTokenName).attr("value", LS.data.csrfToken));
         form.appendTo('body');
         form.submit();
     };
 
     var triggerModalClose = function () {
         $('#RoleControl-action-modal').find('.modal-content').empty();
-        $.fn.yiiGridView.update('rolecontrol--identity-gridPanel', {});
+        $.fn.yiiGridView.update('RoleControl--identity-gridPanel', {});
         $('#RoleControl-action-modal').modal('hide');
     };
 
@@ -201,9 +201,6 @@ var RoleControl = function () {
             $('.RoleControl--selector-roleCheckbox').each(function(){
                 $(this).prop('checked', curVal);
             });
-        });
-        $('#pageSize').on('change', function(){
-            $('#RoleControl--identity-gridPanel').yiiGridView('update',{ data:{ pageSize: $(this).val() }});
         });
         $(document).trigger('actions-updated');
     };

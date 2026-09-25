@@ -18,21 +18,22 @@ App()->getClientScript()->registerCssFile(Yii::app()->getConfig('publicstyleurl'
             ?>
         </div>
         <div class='col-md-4'>
-            <button id='organizer-collapse-all' class='btn btn-outline-secondary'><span class='ri-fullscreen-exit-line'></span>&nbsp;<?php eT("Collapse all"); ?></button>
-            <button id='organizer-expand-all' class='btn btn-outline-secondary'><span class='ri-fullscreen-exit-line'></span>&nbsp;<?php eT("Expand all"); ?></button>
+            <button id='organizer-collapse-all' class='btn btn-outline-secondary'><span class='ri-contract-up-down-line'></span>&nbsp;<?php eT("Collapse all"); ?></button>
+            <button id='organizer-expand-all' class='btn btn-outline-secondary'><span class='ri-expand-up-down-line'></span>&nbsp;<?php eT("Expand all"); ?></button>
         </div>
     </div>
 
     <div class='movableList'>
         <ol class="organizer group-list list-unstyled" data-level='group' data-disableparentchange='<?= intval($surveyActivated) ?>'>
             <?php
-            foreach ($aGroupsAndQuestions as  $aGroupAndQuestions) { ?>
+            foreach ($aGroupsAndQuestions as $aGroupAndQuestions) { ?>
                 <li id='list_g<?php echo $aGroupAndQuestions['gid']; ?>' class='card mjs-nestedSortable-expanded mt-2' data-level='group'>
-
                     <div class="h2 card-header bg-white">
-                        <a class='btn btn-outline-secondary btn-xs ri-arrow-down-s-fill disclose'><span title="Click to show/hide children" class="caret"></span></a>
+                        <button type="button" class='btn btn-outline-secondary btn-xs ri-arrow-down-s-fill disclose' aria-label="<?= gT('Collapse all') ?>" data-label-expand="<?= gT('Expand all') ?>" data-label-collapse="<?= gT('Collapse all') ?>">
+                            <span class="caret"></span>
+                        </button>
                         &nbsp;
-                        <?php echo ellipsize($aGroupAndQuestions['group_text'], 80); ?>
+                        <?= ellipsize($aGroupAndQuestions['group_text'], 80) ?>
                     </div>
                     <?php if (isset($aGroupAndQuestions['questions'])) { ?>
                         <ol class='question-list list-unstyled card-body' data-level='question'>
@@ -48,12 +49,12 @@ App()->getClientScript()->registerCssFile(Yii::app()->getConfig('publicstyleurl'
                         </ol>
                     <?php } ?>
                 </li>
-            <?php
+                <?php
             } ?>
         </ol>
     </div>
 
-    <?php echo CHtml::form(array("surveyAdministration/organize/surveyid/{$surveyid}"), 'post', array('id' => 'frmOrganize', 'style'=>'height:40px')); ?>
+    <?php echo CHtml::form(array("surveyAdministration/organize/surveyid/{$surveyid}"), 'post', array('id' => 'frmOrganize', 'style' => 'height:40px')); ?>
     <p>
         <input type='hidden' id='orgdata' name='orgdata' value='' />
         <!-- set close-after-save true for redirecting to listQuestion page after save -->
